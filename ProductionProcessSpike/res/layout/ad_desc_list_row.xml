@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+    <TextView
+        android:id="@+id/ad_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Poster"
+        android:textColor="#040404"
+        android:textSize="15dip"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/ad_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ad_category"
+        android:layout_below="@+id/ad_category"
+        android:text="A poster campaign around all of the major cities where your Movie will hopefully be shown! The cheapest form of advertising to get people talking, but limited impact."/>
+
+    <TextView
+        android:id="@+id/ad_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ad_desc"
+        android:layout_alignTop="@+id/ad_category"
+        android:text="$1M" />
+
+</RelativeLayout>
