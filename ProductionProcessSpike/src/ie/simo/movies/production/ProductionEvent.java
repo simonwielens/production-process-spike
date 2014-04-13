@@ -1,6 +1,10 @@
 package ie.simo.movies.production;
 
-public class ProductionEvent {
+import java.io.Serializable;
+
+public class ProductionEvent implements Serializable{
+
+	private static final long serialVersionUID = 3503602765920927381L;
 	// PR
 	private int goodBuzz;
 	private int badBuzz;

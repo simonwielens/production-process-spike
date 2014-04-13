@@ -28,10 +28,10 @@ public class AdChoiceDialog extends Dialog{
 	private ProductionThread thread;
 	int selected;
 	
-	public AdChoiceDialog(Context context, final List<Ad> data, List<ProductionEvent> eventList, LazyAdapter adapter) {
+	public AdChoiceDialog(Context context, final List<Ad> data, ProductionThread thread) {
 		super(context);
 		
-		adHandler = new AdHandler(eventList, adapter);
+		adHandler = new AdHandler(thread);
 		dialog = this;
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.choose_advertising_dialog);

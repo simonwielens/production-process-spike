@@ -1,28 +1,20 @@
 package ie.simo.movies.handler;
 
-import ie.simo.movies.adapter.LazyAdapter;
 import ie.simo.movies.production.AdvertisingEvent;
-import ie.simo.movies.production.ProductionEvent;
 import ie.simo.movies.production.advertising.Ad;
-
-import java.util.List;
-
-import android.widget.Adapter;
+import ie.simo.productionprocessspike.ProductionThread;
 
 public class AdHandler {
 
-	private List<ProductionEvent> events;
-	private LazyAdapter adapter;
+	private ProductionThread thread;
 	
-	public AdHandler(List<ProductionEvent> events, LazyAdapter adapter)
+	public AdHandler(ProductionThread thread)
 	{
-		this.events = events;
-		this.adapter = adapter;
+		this.thread = thread;
 	}
 	
 	public void put(Ad ad)
 	{
-		events.add(0, new AdvertisingEvent(ad));
-		adapter.notifyDataSetChanged();
+		thread.handleEvent(new AdvertisingEvent(ad));
 	}
 }

@@ -2,10 +2,6 @@ package ie.simo.productionprocessspike;
 
 import ie.simo.movies.domain.ProductionCompany;
 import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 public abstract class ActivityWithMenu extends Activity {
 	
