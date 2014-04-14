@@ -43,7 +43,6 @@ public class AdChoiceDialog extends Dialog{
 		
 		list.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
 			public void onItemClick(AdapterView<?> list, View view, int index,
 					long arg3) {
 				
@@ -60,14 +59,14 @@ public class AdChoiceDialog extends Dialog{
 		});
 		
 		cancel.setOnClickListener(new View.OnClickListener() {
-			@Override
+			
 			public void onClick(View v) {
 				dialog.dismiss();
 			}
 		});
 		
 		ok.setOnClickListener(new View.OnClickListener() {
-			@Override
+			
 			public void onClick(View v) {
 				adHandler.put(data.get(selected));
 				dialog.dismiss();

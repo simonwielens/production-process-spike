@@ -34,7 +34,7 @@ public class ProductionThread implements Runnable {
 		m.sendToTarget();
 	}
 
-	@Override
+	
 	public void run() {
 		
 		while (productionProgress.getProgress() < 100) {

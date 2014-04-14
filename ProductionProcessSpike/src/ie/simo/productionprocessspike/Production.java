@@ -4,6 +4,11 @@ package ie.simo.productionprocessspike;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.ViewById;
+import com.joanzapata.android.iconify.Iconify;
+
 import ie.simo.movies.adapter.LazyAdapter;
 import ie.simo.movies.dialog.AdChoiceDialog;
 import ie.simo.movies.generator.ProductionEventGenerator;
@@ -24,10 +29,17 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+@EActivity(R.layout.production)
 public class Production extends ActivityWithMenu {
 	
 	public static final String EVENT = "event";
 
+	@ViewById
+	private TextView totalGoodBuzz;
+	
+	@ViewById
+	private TextView totalBadBuzz;
+	
 	private ProgressBar productionProgress;
 	private TextView progressText;
 	private ListView productionNews;
@@ -44,7 +56,13 @@ public class Production extends ActivityWithMenu {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.production);
 		findAllViewsById();
+	}
+	
+	@AfterViews
+	private void afterViews(){
 		setButtonClickListeners(); 
+		Iconify.addIcons(totalBadBuzz);
+		Iconify.addIcons(totalGoodBuzz);
 		adapter = new LazyAdapter(this, listItems);
 		productionNews.setAdapter(adapter);
 		handler = new Handler(){
@@ -78,7 +96,6 @@ public class Production extends ActivityWithMenu {
 	private void setButtonClickListeners() {
 		advertise.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				paused = true;
 				Ad[] ads = {new Posters(), new InternetAds(), new Radio(), new TvAds(), new ViralAd()};
