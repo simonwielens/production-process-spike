@@ -20,9 +20,12 @@ import ie.simo.movies.production.advertising.Posters;
 import ie.simo.movies.production.advertising.Radio;
 import ie.simo.movies.production.advertising.TvAds;
 import ie.simo.movies.production.advertising.ViralAd;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -33,6 +36,12 @@ public class Production extends ActivityWithMenu {
 	
 	public static final String EVENT = "event";
 
+	/**
+	 * 
+	 * TODO: track total good buzz and bad buzz
+	 * 
+	 */
+	
 	@ViewById
 	protected TextView totalGoodBuzz;
 	
@@ -50,6 +59,9 @@ public class Production extends ActivityWithMenu {
 	
 	@ViewById(value = R.id.advertiseBtn)
 	protected Button advertise;
+	
+	@ViewById(value = R.id.publicityBtn)
+	protected Button publicity;
 	
 	private LazyAdapter adapter;
 	private ArrayList<ProductionEvent> listItems = new ArrayList<ProductionEvent>();
@@ -100,6 +112,23 @@ public class Production extends ActivityWithMenu {
 		paused = true;
 		Ad[] ads = {new Posters(), new InternetAds(), new Radio(), new TvAds(), new ViralAd()};
 		new AdChoiceDialog(Production.this, Arrays.asList(ads), thread).show();
+		adapter.notifyDataSetChanged();
+	}
+	
+	@Click (R.id.publicityBtn)
+	protected void publicityClick(){
+		paused = true;
+		new AlertDialog.Builder(this)
+			.setTitle("Publicity")
+			.setMessage("hire a publicist to drum up interest in your movie")
+			.setCancelable(true)
+			.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			}).create().show();
 		paused = false;
 		adapter.notifyDataSetChanged();
 	}

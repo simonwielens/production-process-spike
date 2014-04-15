@@ -26,6 +26,11 @@ public class ProductionThread implements Runnable {
 		m.sendToTarget();
 	}
 	
+	public void setPaused(boolean isPaused)
+	{
+		this.production.setPaused(isPaused);
+	}
+	
 	public void handleProgress(int progress)
 	{
 		Message m = Message.obtain(production.getHandler());

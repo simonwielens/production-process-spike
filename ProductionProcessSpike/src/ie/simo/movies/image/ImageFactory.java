@@ -1,5 +1,6 @@
 package ie.simo.movies.image;
 
+import ie.simo.movies.production.AdvertisingEvent;
 import ie.simo.productionprocessspike.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,8 +14,8 @@ public class ImageFactory {
 	
 	public Drawable getImage(String type){
 		int id;
-		
-		if(type != null && type.equalsIgnoreCase("AdvertisingEvent")){
+		//TODO see where this comes from, should be advertisingevent
+		if(type != null && type.contains("Advertising")){
 			id = R.drawable.ad;
 		}
 		else {

@@ -28,7 +28,7 @@ public class AdChoiceDialog extends Dialog{
 	private ProductionThread thread;
 	int selected;
 	
-	public AdChoiceDialog(Context context, final List<Ad> data, ProductionThread thread) {
+	public AdChoiceDialog(Context context, final List<Ad> data, final ProductionThread thread) {
 		super(context);
 		
 		adHandler = new AdHandler(thread);
@@ -61,6 +61,7 @@ public class AdChoiceDialog extends Dialog{
 		cancel.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
+				thread.setPaused(false);
 				dialog.dismiss();
 			}
 		});
@@ -69,6 +70,7 @@ public class AdChoiceDialog extends Dialog{
 			
 			public void onClick(View v) {
 				adHandler.put(data.get(selected));
+				thread.setPaused(false);
 				dialog.dismiss();
 			}
 		});
