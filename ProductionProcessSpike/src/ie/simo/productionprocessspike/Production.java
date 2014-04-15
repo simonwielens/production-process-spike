@@ -1,12 +1,13 @@
 package ie.simo.productionprocessspike;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
 import com.joanzapata.android.iconify.Iconify;
 
 import ie.simo.movies.adapter.LazyAdapter;
@@ -20,10 +21,8 @@ import ie.simo.movies.production.advertising.Radio;
 import ie.simo.movies.production.advertising.TvAds;
 import ie.simo.movies.production.advertising.ViralAd;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -35,32 +34,35 @@ public class Production extends ActivityWithMenu {
 	public static final String EVENT = "event";
 
 	@ViewById
-	private TextView totalGoodBuzz;
+	protected TextView totalGoodBuzz;
 	
 	@ViewById
-	private TextView totalBadBuzz;
+	protected TextView totalBadBuzz;
 	
-	private ProgressBar productionProgress;
-	private TextView progressText;
-	private ListView productionNews;
+	@ViewById
+	protected ProgressBar productionProgress;
+	
+	@ViewById(value = R.id.productionprogresstv)
+	protected TextView progressText;
+	
+	@ViewById(value = android.R.id.list)
+	protected ListView productionNews;
+	
+	@ViewById(value = R.id.advertiseBtn)
+	protected Button advertise;
+	
 	private LazyAdapter adapter;
 	private ArrayList<ProductionEvent> listItems = new ArrayList<ProductionEvent>();
 	private static Handler handler;
 	private ProductionEventGenerator eventGenerator = new ProductionEventGenerator();
 	private boolean paused = false;
-	private Button advertise;
+	
 	private ProductionThread thread;
-
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.production);
-		findAllViewsById();
-	}
 	
 	@AfterViews
-	private void afterViews(){
-		setButtonClickListeners(); 
+	protected void afterViews(){
+		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		Iconify.addIcons(totalBadBuzz);
 		Iconify.addIcons(totalGoodBuzz);
 		adapter = new LazyAdapter(this, listItems);
@@ -92,26 +94,14 @@ public class Production extends ActivityWithMenu {
 		
 		startProduction();
 	}
-
-	private void setButtonClickListeners() {
-		advertise.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				paused = true;
-				Ad[] ads = {new Posters(), new InternetAds(), new Radio(), new TvAds(), new ViralAd()};
-				new AdChoiceDialog(Production.this, Arrays.asList(ads), thread).show();
-				paused = false;
-				adapter.notifyDataSetChanged();
-			}
-		});
-		
-	}
-
-	private void findAllViewsById() {
-		setProductionProgress((ProgressBar) findViewById(R.id.productionProgress));
-		progressText = (TextView) findViewById(R.id.productionprogresstv);
-		productionNews = (ListView) findViewById(android.R.id.list);
-		advertise = (Button) findViewById(R.id.advertiseBtn);
+	
+	@Click (R.id.advertiseBtn)
+	protected void advertiseClick(){
+		paused = true;
+		Ad[] ads = {new Posters(), new InternetAds(), new Radio(), new TvAds(), new ViralAd()};
+		new AdChoiceDialog(Production.this, Arrays.asList(ads), thread).show();
+		paused = false;
+		adapter.notifyDataSetChanged();
 	}
 	
 	public void startProduction(){
