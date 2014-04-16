@@ -6,6 +6,8 @@ import ie.simo.productionprocessspike.R;
 
 import java.util.ArrayList;
 
+import com.joanzapata.android.iconify.Iconify;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -51,6 +53,12 @@ public class LazyAdapter extends BaseAdapter {
         TextView goodBuzz = (TextView)vi.findViewById(R.id.goodBuzz); // duration
         TextView badBuzz = (TextView)vi.findViewById(R.id.badBuzz); // duration
         ImageView thumb_image =(ImageView)vi.findViewById(R.id.list_image); // thumb image
+        TextView clockIcon = (TextView) vi.findViewById(R.id.timeIcon);
+        TextView timeDelta = (TextView) vi.findViewById(R.id.timeDelta);
+        TextView thumbUp = (TextView) vi.findViewById(R.id.thumbup);
+        TextView thumbDown = (TextView) vi.findViewById(R.id.thumbdown);
+        
+        Iconify.addIcons(clockIcon, thumbUp, thumbDown);
  
         ProductionEvent event = data.get(position);
  
@@ -59,6 +67,7 @@ public class LazyAdapter extends BaseAdapter {
         comment.setText(event.getDescription());
         goodBuzz.setText(event.getGoodBuzz() + "");
         badBuzz.setText(event.getBadBuzz() + "");
+        timeDelta.setText(event.getProductionInfluence() + "%");
         thumb_image.setImageDrawable(factory.getImage(event.getTitle()));
         return vi;
     }

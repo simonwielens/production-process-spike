@@ -29,13 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
-        android:text="Rihanna Love the way lie"
+        android:text="Sample Title"
         android:textColor="#040404"
         android:typeface="sans"
         android:textSize="15dip"
         android:textStyle="bold"/>
- 
-    <!-- Artist Name -->
     <TextView
         android:id="@+id/comment"
         android:layout_width="fill_parent"
@@ -48,14 +46,56 @@
         android:text="hello there" />
 
     <TextView
+        android:id="@+id/timeDelta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/timeIcon"
+        android:layout_alignBottom="@+id/timeIcon"
+        android:layout_alignRight="@+id/comment"
+        android:text="0%" />
+
+    <TextView
+        android:id="@+id/timeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/thumbnail"
+        android:layout_toLeftOf="@+id/timeDelta"
+        android:paddingRight="10dp"
+        android:text="{fa-clock-o}" />
+
+    <TextView
         android:id="@+id/badBuzz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/goodBuzz"
-        android:layout_alignBottom="@+id/goodBuzz"
-        android:layout_alignRight="@+id/comment"
+        android:layout_alignTop="@+id/title"
+        android:layout_toRightOf="@+id/timeIcon"
         android:text="bad"
         android:textColor="#10bcc9"
+        android:textSize="10dip"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/thumbdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/badBuzz"
+        android:layout_alignBottom="@+id/badBuzz"
+        android:layout_alignRight="@+id/timeIcon"
+        android:paddingLeft="15dp"
+        android:paddingRight="5dp"
+        android:text="{fa-thumbs-o-down}"
+        android:textColor="#ff0000"
+        android:textSize="10dip"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/thumbup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/title"
+        android:layout_toLeftOf="@+id/goodBuzz"
+        android:text="{fa-thumbs-o-up}"
+        android:textColor="#00FF00"
         android:textSize="10dip"
         android:textStyle="bold" />
 
@@ -63,27 +103,13 @@
         android:id="@+id/goodBuzz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/title"
+        android:layout_alignBaseline="@+id/thumbdown"
+        android:layout_alignBottom="@+id/thumbdown"
         android:layout_toLeftOf="@+id/thumbdown"
+        android:paddingLeft="5dp"
         android:text="good"
         android:textColor="#10bcc9"
         android:textSize="10dip"
         android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/thumbdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/badBuzz"
-        android:layout_toLeftOf="@+id/badBuzz"
-        android:src="@drawable/thumbdown" />
-
-    <ImageView
-        android:id="@+id/thumbup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/goodBuzz"
-        android:layout_toLeftOf="@+id/goodBuzz"
-        android:src="@drawable/thumbup" />
  
 </RelativeLayout>

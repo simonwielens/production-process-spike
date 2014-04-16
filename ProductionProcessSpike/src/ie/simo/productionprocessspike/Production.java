@@ -76,7 +76,7 @@ public class Production extends ActivityWithMenu {
 		Iconify.addIcons(totalGoodBuzz);
 		adapter = new LazyAdapter(this, listItems);
 		productionNews.setAdapter(adapter);
-		handler = new Handler(){
+		handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				ProductionEvent event = (ProductionEvent) msg.getData().get(EVENT);
@@ -91,8 +91,7 @@ public class Production extends ActivityWithMenu {
 					totalGoodBuzz.setText(goodBuzzCounter + " {fa-thumbs-o-up}");
 					totalBadBuzz.setText(badBuzzCounter + " {fa-thumbs-o-down}");
 					
-					Iconify.addIcons(totalBadBuzz);
-					Iconify.addIcons(totalGoodBuzz);
+					Iconify.addIcons(totalBadBuzz, totalGoodBuzz);
 				}
 				
 				int progress = msg.arg1;
