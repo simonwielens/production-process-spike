@@ -29,7 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="10 {fa-thumbs-o-up}" />
+                android:text="0 {fa-thumbs-o-up}" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_weight="1"
-                android:text="2 {fa-thumbs-o-down}" />
+                android:text="0 {fa-thumbs-o-down}" />
         </LinearLayout>
     </LinearLayout>
 

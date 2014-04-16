@@ -35,12 +35,6 @@ import android.widget.TextView;
 public class Production extends ActivityWithMenu {
 	
 	public static final String EVENT = "event";
-
-	/**
-	 * 
-	 * TODO: track total good buzz and bad buzz
-	 * 
-	 */
 	
 	@ViewById
 	protected TextView totalGoodBuzz;
@@ -69,6 +63,9 @@ public class Production extends ActivityWithMenu {
 	private ProductionEventGenerator eventGenerator = new ProductionEventGenerator();
 	private boolean paused = false;
 	
+	int goodBuzzCounter;
+	int badBuzzCounter;
+	
 	private ProductionThread thread;
 	
 	@AfterViews
@@ -86,7 +83,16 @@ public class Production extends ActivityWithMenu {
 				if(event != null)
 				{
 					listItems.add(0, event);
+					
+					goodBuzzCounter += event.getGoodBuzz();
+					badBuzzCounter += event.getBadBuzz();
 					adapter.notifyDataSetChanged();
+					
+					totalGoodBuzz.setText(goodBuzzCounter + " {fa-thumbs-o-up}");
+					totalBadBuzz.setText(badBuzzCounter + " {fa-thumbs-o-down}");
+					
+					Iconify.addIcons(totalBadBuzz);
+					Iconify.addIcons(totalGoodBuzz);
 				}
 				
 				int progress = msg.arg1;
