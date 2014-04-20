@@ -31,8 +31,8 @@ public class ProductionEventGenerator {
 				new ProductionEvent(1, 5, -2, "Your sound engineer has accidentally appeared on 'To catch a predator'. Production has been delayed while you get a replacement", false)
 
 		};
-		//TODO make real random events
-		return new ProductionEvent(1, 5, -2, "Your sound engineer has accidentally appeared on 'To catch a predator'. Production has been delayed while you get a replacement", false);
+		
+		return events[new Random().nextInt(events.length)];
 	
 	
 	
