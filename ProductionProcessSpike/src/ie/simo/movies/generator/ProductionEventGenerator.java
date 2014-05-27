@@ -33,9 +33,6 @@ public class ProductionEventGenerator {
 		};
 		
 		return events[new Random().nextInt(events.length)];
-	
-	
-	
 	}
 	
 	//5% chance of getting an event

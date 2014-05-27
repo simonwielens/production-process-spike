@@ -18,6 +18,9 @@ public class ImageFactory {
 		if(type != null && type.contains("Advertising")){
 			id = R.drawable.ad;
 		}
+		else if(type != null && type.contains("Screening")) {
+			id = R.drawable.popcorn;
+		}
 		else {
 			id = R.drawable.camera;
 		}

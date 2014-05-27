@@ -14,6 +14,7 @@ import ie.simo.movies.adapter.LazyAdapter;
 import ie.simo.movies.dialog.AdChoiceDialog;
 import ie.simo.movies.generator.ProductionEventGenerator;
 import ie.simo.movies.production.ProductionEvent;
+import ie.simo.movies.production.ScreeningEvent;
 import ie.simo.movies.production.advertising.Ad;
 import ie.simo.movies.production.advertising.InternetAds;
 import ie.simo.movies.production.advertising.Posters;
@@ -23,6 +24,7 @@ import ie.simo.movies.production.advertising.ViralAd;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -54,8 +56,8 @@ public class Production extends ActivityWithMenu {
 	@ViewById(value = R.id.advertiseBtn)
 	protected Button advertise;
 	
-	@ViewById(value = R.id.publicityBtn)
-	protected Button publicity;
+	@ViewById(value = R.id.screeningBtn)
+	protected Button screening;
 	
 	private LazyAdapter adapter;
 	private ArrayList<ProductionEvent> listItems = new ArrayList<ProductionEvent>();
@@ -120,17 +122,34 @@ public class Production extends ActivityWithMenu {
 		adapter.notifyDataSetChanged();
 	}
 	
-	@Click (R.id.publicityBtn)
-	protected void publicityClick(){
+	@Click (R.id.screeningBtn)
+	protected void screeningClick(){
 		paused = true;
 		new AlertDialog.Builder(this)
-			.setTitle("Publicity")
-			.setMessage("hire a publicist to drum up interest in your movie")
+			.setTitle("Arrange Screening")
+			.setMessage("Choose where to hold the screening")
 			.setCancelable(true)
-			.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			.setNeutralButton("On Studio Lot", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					Message m = Message.obtain(handler);
+					Bundle b = new Bundle();
+					b.putSerializable(Production.EVENT, new ScreeningEvent("the studio lot"));
+					m.setData(b);
+					m.sendToTarget();
+					dialog.dismiss();
+				}
+			})
+			.setPositiveButton("In A City", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Message m = Message.obtain(handler);
+					Bundle b = new Bundle();
+					b.putSerializable(Production.EVENT, new ScreeningEvent("London"));
+					m.setData(b);
+					m.sendToTarget();
 					dialog.dismiss();
 				}
 			}).create().show();
