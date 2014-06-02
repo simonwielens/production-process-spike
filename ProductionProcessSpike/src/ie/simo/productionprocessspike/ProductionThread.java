@@ -2,7 +2,6 @@ package ie.simo.productionprocessspike;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.view.View;
 import android.widget.ProgressBar;
 import ie.simo.movies.production.CompletionStatusEvent;
 import ie.simo.movies.production.ProductionEvent;
@@ -12,7 +11,6 @@ public class ProductionThread implements Runnable {
 
 	private Production production;
 	private ProgressBar productionProgress;
-	private static final String EFFECTS = "Good buzz changed by %d. Bad buzz changed by %d. ";
 
 	public ProductionThread(Production production) {
 		this.production = production;

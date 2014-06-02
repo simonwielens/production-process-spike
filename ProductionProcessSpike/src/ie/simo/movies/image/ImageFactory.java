@@ -1,6 +1,5 @@
 package ie.simo.movies.image;
 
-import ie.simo.movies.production.AdvertisingEvent;
 import ie.simo.productionprocessspike.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;

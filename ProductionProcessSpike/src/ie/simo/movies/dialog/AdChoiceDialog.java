@@ -1,9 +1,7 @@
 package ie.simo.movies.dialog;
 
 import ie.simo.movies.adapter.AdvertisingAdapter;
-import ie.simo.movies.adapter.LazyAdapter;
 import ie.simo.movies.handler.AdHandler;
-import ie.simo.movies.production.ProductionEvent;
 import ie.simo.movies.production.advertising.Ad;
 import ie.simo.productionprocessspike.ProductionThread;
 import ie.simo.productionprocessspike.R;
@@ -25,7 +23,6 @@ public class AdChoiceDialog extends Dialog{
 	private Dialog dialog;
 	private Button ok;
 	private AdHandler adHandler;
-	private ProductionThread thread;
 	int selected;
 	
 	public AdChoiceDialog(Context context, final List<Ad> data, final ProductionThread thread) {
