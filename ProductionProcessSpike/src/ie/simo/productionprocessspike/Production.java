@@ -15,6 +15,7 @@ import com.joanzapata.android.iconify.Iconify;
 import ie.simo.movies.adapter.LazyAdapter;
 import ie.simo.movies.dialog.AdChoiceDialog;
 import ie.simo.movies.generator.ProductionEventGenerator;
+import ie.simo.movies.production.FilmFestivalEvent;
 import ie.simo.movies.production.ProductionEvent;
 import ie.simo.movies.production.ScreeningEvent;
 import ie.simo.movies.production.advertising.Ad;
@@ -23,6 +24,7 @@ import ie.simo.movies.production.advertising.Posters;
 import ie.simo.movies.production.advertising.Radio;
 import ie.simo.movies.production.advertising.TvAds;
 import ie.simo.movies.production.advertising.ViralAd;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
@@ -80,11 +82,12 @@ public class Production extends ActivityWithMenu {
 
 	private ProductionThread thread;
 
+	@SuppressLint("HandlerLeak")
 	@AfterViews
 	protected void afterViews() {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		releaseMovieButton.setVisibility(View.GONE);
+		releaseMovieButton.setEnabled(false);
 		Iconify.addIcons(totalBadBuzz);
 		Iconify.addIcons(totalGoodBuzz);
 		adapter = new LazyAdapter(this, listItems);
@@ -110,7 +113,7 @@ public class Production extends ActivityWithMenu {
 				}
 				else if(event != null && event.isInteractive()){
 					paused = true;
-					new AlertDialog.Builder(getApplicationContext())
+					new AlertDialog.Builder(Production.this)
 					.setTitle("Film Festival")
 					.setMessage("You have been invited to submit your movie to a film festival. It could be a great way to promote the movie, but if it is to early in production it could lead to negative reviews...")
 					.setNegativeButton("No Thanks", new DialogInterface.OnClickListener() {
@@ -125,7 +128,13 @@ public class Production extends ActivityWithMenu {
 						
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							//create event
+							Message m = Message.obtain(handler);
+							Bundle b = new Bundle();
+							b.putSerializable(Production.EVENT,
+									new FilmFestivalEvent("You entered Cannes film festival, it was lovely", 0, 0));
+							m.setData(b);
+							m.sendToTarget();
+							paused = false;
 							dialog.dismiss();
 						}
 					})
@@ -139,7 +148,10 @@ public class Production extends ActivityWithMenu {
 							+ "%");
 					productionProgress.setProgress(progress);
 				}
-
+				
+				if(progress == 100){
+					showReleaseButton();
+				}
 			}
 		};
 
@@ -147,6 +159,11 @@ public class Production extends ActivityWithMenu {
 		this.thread = runnable;
 
 		startProduction();
+	}
+	
+	@Click(R.id.releaseMovie)
+	protected void releaseClick() {
+		finish();
 	}
 
 	@Click(R.id.advertiseBtn)
@@ -240,12 +257,10 @@ public class Production extends ActivityWithMenu {
 	public void startProduction() {
 		Thread t = new Thread(thread);
 		t.start();
-		
-		//do nothing until it's finished
-		while(t.isAlive()) {};
-		
-		releaseMovieButton.setVisibility(View.VISIBLE);
-		
+	}
+	
+	public void showReleaseButton() {
+		releaseMovieButton.setEnabled(true);
 	}
 
 	public ProgressBar getProductionProgress() {
