@@ -2,6 +2,7 @@ package ie.simo.productionprocessspike;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.view.View;
 import android.widget.ProgressBar;
 import ie.simo.movies.production.CompletionStatusEvent;
 import ie.simo.movies.production.ProductionEvent;

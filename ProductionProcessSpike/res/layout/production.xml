@@ -97,13 +97,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_weight="1" >
+        android:layout_weight="1" 
+        android:orientation="vertical">
 
         <ListView
             android:id="@id/android:list"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="350dp" >
         </ListView>
+
+        <Button
+            android:id="@+id/releaseMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Release Movie" />
+
     </LinearLayout>
 
 </LinearLayout>
