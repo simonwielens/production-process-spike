@@ -14,12 +14,15 @@ public class ImageFactory {
 	
 	public Drawable getImage(String type){
 		int id;
-		//TODO see where this comes from, should be advertisingevent
+		
 		if(type != null && type.contains("Advertising")){
 			id = R.drawable.ad;
 		}
 		else if(type != null && type.contains("Screening")) {
 			id = R.drawable.popcorn;
+		}
+		else if(type != null && type.contains("Festival")) {
+			id = R.drawable.festival;
 		}
 		else {
 			id = R.drawable.camera;
